@@ -12,7 +12,7 @@ resource "azurerm_network_interface" "nicmgtvm" {
 
   ip_configuration {
     name                          = "ipconfig1"
-    subnet_id                     = var.azurerm_subnet_id
+    subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Dynamic"
   }
 }

@@ -1,4 +1,4 @@
-variable "azurerm_subnet_id" {
+variable "subnet_id" {
   description = "Subnet ID for VM NIC association"
   type        = string
 }
