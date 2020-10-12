@@ -1,5 +1,3 @@
-// output
-
 output "vm_name" {
   description = "Name of the VM"
   value       = azurerm_virtual_machine.vmmgtvm.name
