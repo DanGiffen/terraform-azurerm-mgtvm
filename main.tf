@@ -1,3 +1,4 @@
+// resources
 resource "azurerm_public_ip" "pipmgtvm" {
   name                = "cdwmgtvm-pip"
   location            = var.location
@@ -14,6 +15,7 @@ resource "azurerm_network_interface" "nicmgtvm" {
     name                          = "ipconfig1"
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id = azurerm_public_ip.pipmgtvm.id
   }
 }
 
@@ -77,4 +79,10 @@ resource "azurerm_network_security_rule" "nsgwinremoterule" {
 resource "azurerm_network_interface_security_group_association" "nsgassmgtvm" {
   network_interface_id      = azurerm_network_interface.nicmgtvm.id
   network_security_group_id = azurerm_network_security_group.nsgmgtvm.id
+}
+
+data "azurerm_public_ip" "pip" {
+  name = azurerm_public_ip.pipmgtvm.name
+  resource_group_name = azurerm_public_ip.pipmgtvm.resource_group_name
+  depends_on = [azurerm_virtual_machine.vmmgtvm]
 }
